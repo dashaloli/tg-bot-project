@@ -1,0 +1,16 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+class Config:
+    BOT_TOKEN = os.getenv("BOT_TOKEN")
+    ADMIN_IDS = list(map(int, os.getenv("ADMIN_IDS", "").split(",")))
+    
+    # Database configuration
+    DB_NAME = os.getenv("DB_NAME", "shop_bot.db")
+    DB_PATH = os.path.join(os.path.dirname(__file__), "data", DB_NAME)
+    
+    # Create data directory if not exists
+    if not os.path.exists(os.path.dirname(DB_PATH)):
+        os.makedirs(os.path.dirname(DB_PATH))
